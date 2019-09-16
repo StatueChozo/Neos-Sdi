@@ -1,0 +1,39 @@
+<h2>Edit</h2>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Prénom</label>
+          <input type="text" formControlName="firstName" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required">Le prénom est requis</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Nom</label>
+          <input type="text" formControlName="lastName" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+          <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors.required">Le nom est requis</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Pays</label>
+          <input type="text" formControlName="country" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
+          <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+            <div *ngIf="f.country.errors.required">Le pays est requis</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary">Sauvegarder</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-sm"></div>
+    <div class="col-sm"></div>
+  </div>

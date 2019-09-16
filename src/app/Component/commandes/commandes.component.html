@@ -1,0 +1,84 @@
+<p>commandes works!</p>
+
+
+<select class="form-control" id="power" #t (change)="selectedCustomer(t.value)" [(ngModel)]="customerId" name=selectId>
+  <option value={{0}} selected="true">--Sélectionnez un client--</option>
+  <option *ngFor="let Customers of customerData" [routerLink]="['/Commande']" [queryParams]="{customerId: Customers.Id}"
+    value="{{Customers.Id}}" routerLinkActive="active">{{Customers.Id}} {{Customers.LastName}} {{Customers.FirstName}}
+  </option>s>
+</select>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Date De Création</th>
+      <th scope="col">Prix Total</th>
+      <th scope="col">Id client</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <tr *ngFor="let Order of orderData">
+
+      <td>{{Order.Id}}</td>
+      <td>{{Order.CreationDate | date}}</td>
+      <td>{{Order.TotalPrice  | currency}}</td>
+      <td>{{Order.CustomerId}}</td>
+      <td><Button class="btn btn-primary" (click)="delete(Order.Id)"> Supprimer</Button></td>
+      <td>
+        <ngb-accordion>
+          <ngb-panel>
+            <ng-template ngbPanelTitle>
+              <span><Button class="btn btn-primary"> Détails</Button></span>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">UnitPrice</th>
+                    <th scope="col">ArticleId</th>
+                    <th scope="col">OrderId</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  <tr *ngFor="let OrderLine of Order.OrderLines">
+
+                    <td>{{OrderLine.Id}}</td>
+                    <td>{{OrderLine.Quantity}}</td>
+                    <td>{{OrderLine.UnitPrice | currency}}</td>
+                    <td>{{OrderLine.ArticleId}}</td>
+                    <td>{{OrderLine.OrderId}}</td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+      </td>
+    </tr>
+
+  </tbody>
+
+</table>
+
+
+<ng-template #contentModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Test</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('No')">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Supprimer ???</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Yes')">Oui</button>
+    </div>
+</ng-template>

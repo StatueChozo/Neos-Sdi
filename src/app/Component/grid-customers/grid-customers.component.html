@@ -1,0 +1,31 @@
+<h2>Liste Clients</h2>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Prénom</th>
+      <th scope="col">Pays</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <tr *ngFor="let Customers of customerData">
+
+      <td>{{Customers.Id}}</td>
+      <td>{{Customers.LastName}}</td>
+      <td>{{Customers.FirstName}}</td>
+      <td>{{Customers.Country}}</td>
+      <td><button type="button" class="btn btn-primary" (click)="clickEdit(Customers)">Edit</button></td>
+      <td><button type="button" class="btn btn-primary" [routerLink]="['/Commande']"
+          [queryParams]="{customerId: Customers.Id}" routerLinkActive="active">Commandes </button></td>
+    </tr>
+
+  </tbody>
+
+</table>
+<ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="countItems" (pageChange)="loadPage()"
+  [maxSize]="10">
+</ngb-pagination>
