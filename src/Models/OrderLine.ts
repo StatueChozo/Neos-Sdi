@@ -1,8 +1,8 @@
 class OrderLine {
-      Id: number;
-      Quantity: number;
-      UnitPrice: number;
-      ArticleId: number;
-      OrderId: number;
+      id: number;
+      quantity: number;
+      unitPrice: number;
+      articleId: number;
+      orderId: number;
 }
 

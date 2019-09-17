@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { JsonPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Customer } from 'src/Models/Customers';
 import { environment } from 'src/environments/environment';
@@ -10,11 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ClientServiceService {
 
-
-
   constructor(private http: HttpClient) { }
-
-
 
   getCustomers(pageSize: number, currentPage: number): Observable<PagedItems<Customer>> {
     const apiCustomer = environment.apiBaseUrl + '?StartIndex=' + (currentPage - 1) * pageSize + '&NumberItems=' + pageSize;
@@ -30,7 +25,6 @@ export class ClientServiceService {
     const api = environment.apiBaseUrl + '?customerId=' + id;
     return this.http.put(api, customer);
   }
-
 
   getOrder(id: number): Observable<Order[]> {
     const api = environment.apiCommandesUrl + '?customerId=' + id;

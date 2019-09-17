@@ -8,8 +8,7 @@ import { Customer } from 'src/Models/Customers';
   styleUrls: ['./grid-customers.component.scss']
 })
 export class GridCustomersComponent implements OnInit {
-  public customerData: Customer[];
-  public countItems: number;
+  public pagedData: PagedItems<Customer>;
   public pageSize = 10;
   public page = 1;
 
@@ -24,8 +23,7 @@ export class GridCustomersComponent implements OnInit {
   public loadPage() {
     this.service.getCustomers(this.pageSize, this.page).subscribe(c => {
 
-      this.customerData = c.items,
-      this.countItems = c.itemsCount;
+      this.pagedData = c;
       console.log(c.items);
     });
   }

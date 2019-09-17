@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientServiceService } from 'src/app/Services/client-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-commandes',
@@ -14,19 +16,16 @@ export class CommandesComponent implements OnInit {
   customerData: any[];
   totalCustomer: number;
 
-  constructor(private service: ClientServiceService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private service: ClientServiceService, private route: ActivatedRoute,
+              private router: Router,
+              private modalService: NgbModal) { }
 
   ngOnInit() {
 
-    this.service.getCustomers(1, 1).subscribe(c => {
+    this.service.getCustomers(-1, 1).subscribe(customers => {
 
-      this.totalCustomer = c.itemsCount,
-
-        this.service.getCustomers(this.totalCustomer, 1).subscribe(customers => {
-
-          this.customerData = customers.items;
-
-        });
+      this.customerData = customers.items,
+        this.totalCustomer = customers.itemsCount;
 
     });
     this.orderLoad();
@@ -47,16 +46,22 @@ export class CommandesComponent implements OnInit {
   }
 
   delete(orderId: number) {
-    if (window.confirm('Voulez vous supprimer cette commande ?')) {
-      this.service.deleteOrder(orderId).subscribe(data => {
+    this.service.deleteOrder(orderId).subscribe(data => {
 
-        console.log(data);
-        this.orderLoad();
-      });
-    }
+      console.log(data);
+      this.orderLoad();
+    });
   }
 
   selectedCustomer(customerId: number) {
-    this.router.navigate(['/Commande'], {queryParams: {customerId}});
+    this.router.navigate(['/Commande'], { queryParams: { customerId } });
+  }
+
+  openModalTemplate(content, orderId: number) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.delete(orderId);
+    }, (reason) => {
+      console.log('No');
+    });
   }
 }

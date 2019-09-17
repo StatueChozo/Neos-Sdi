@@ -1,10 +1,9 @@
-
 <div class="row">
 
-    <div class="col-md-4">
+    <div class="col-md-8">
         <app-grid-customers #gridCustomer (customerSelected)="customerSelectedEvent($event)"></app-grid-customers>
     </div>
-    <div class="col-md-8">
-        <app-edit-customers [customerEdit]="[customer]" (saveEvent)="gridCustomer.loadPage()"></app-edit-customers>
+    <div class="col-md-4">
+        <app-edit-customers [customerEdit]="customer" (saveEvent)="gridCustomer.loadPage()"></app-edit-customers>
     </div>
 </div>

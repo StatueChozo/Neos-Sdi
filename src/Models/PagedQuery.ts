@@ -1,5 +1,4 @@
-class PagedQuery
-{
-      StartiIndex: number
-      NumberItems: number
+class PagedQuery {
+      startiIndex: number;
+      numberItems: number;
 }

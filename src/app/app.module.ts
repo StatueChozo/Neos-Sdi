@@ -10,9 +10,6 @@ import { GridCustomersComponent } from './Component/grid-customers/grid-customer
 import { EditCustomersComponent } from './Component/edit-customers/edit-customers.component';
 import { CommandesComponent } from './Component/commandes/commandes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ConfirmModalContentComponent } from './Component/modal/confirm-modal-content.component';
-import { ModalTestComponent } from './Component/modal-test/modal-test.component';
-
 
 @NgModule({
   declarations: [
@@ -20,9 +17,7 @@ import { ModalTestComponent } from './Component/modal-test/modal-test.component'
     CustomersComponent,
     GridCustomersComponent,
     EditCustomersComponent,
-    CommandesComponent,
-    ConfirmModalContentComponent,
-    ModalTestComponent
+    CommandesComponent
    ],
   imports: [
     BrowserModule,
@@ -33,7 +28,6 @@ import { ModalTestComponent } from './Component/modal-test/modal-test.component'
     ReactiveFormsModule
   ],
   providers: [],
-  entryComponents: [ConfirmModalContentComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

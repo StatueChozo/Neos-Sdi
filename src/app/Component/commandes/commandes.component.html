@@ -1,14 +1,11 @@
-<p>commandes works!</p>
-
-
 <select class="form-control" id="power" #t (change)="selectedCustomer(t.value)" [(ngModel)]="customerId" name=selectId>
-  <option value={{0}} selected="true">--Sélectionnez un client--</option>
-  <option *ngFor="let Customers of customerData" [routerLink]="['/Commande']" [queryParams]="{customerId: Customers.Id}"
-    value="{{Customers.Id}}" routerLinkActive="active">{{Customers.Id}} {{Customers.LastName}} {{Customers.FirstName}}
-  </option>s>
+  <option [ngValue]="null" disabled>--Sélectionnez un client--</option>
+  <option *ngFor="let Customers of customerData" [routerLink]="['/Commande']" [queryParams]="{customerId: Customers.id}"
+    value="{{Customers.id}}" routerLinkActive="active">{{Customers.id}} {{Customers.lastName}} {{Customers.firstName}}
+  </option>
 </select>
 
-<table class="table">
+<table class="table table-bordered">
   <thead>
     <tr>
       <th scope="col">Id</th>
@@ -21,11 +18,11 @@
     <tr>
     <tr *ngFor="let Order of orderData">
 
-      <td>{{Order.Id}}</td>
-      <td>{{Order.CreationDate | date}}</td>
-      <td>{{Order.TotalPrice  | currency}}</td>
-      <td>{{Order.CustomerId}}</td>
-      <td><Button class="btn btn-primary" (click)="delete(Order.Id)"> Supprimer</Button></td>
+      <td>{{Order.id}}</td>
+      <td>{{Order.creationDate | date}}</td>
+      <td>{{Order.totalPrice  | currency}}</td>
+      <td>{{Order.customerId}}</td>
+      <td><Button class="btn btn-primary" (click)="openModalTemplate(contentModal,Order.id)"> Supprimer</Button></td>
       <td>
         <ngb-accordion>
           <ngb-panel>
@@ -45,13 +42,13 @@
                 </thead>
                 <tbody>
                   <tr>
-                  <tr *ngFor="let OrderLine of Order.OrderLines">
+                  <tr *ngFor="let OrderLine of Order.orderLines">
 
-                    <td>{{OrderLine.Id}}</td>
-                    <td>{{OrderLine.Quantity}}</td>
-                    <td>{{OrderLine.UnitPrice | currency}}</td>
-                    <td>{{OrderLine.ArticleId}}</td>
-                    <td>{{OrderLine.OrderId}}</td>
+                    <td>{{OrderLine.id}}</td>
+                    <td>{{OrderLine.quantity}}</td>
+                    <td>{{OrderLine.unitPrice | currency}}</td>
+                    <td>{{OrderLine.articleId}}</td>
+                    <td>{{OrderLine.orderId}}</td>
 
                   </tr>
 
@@ -68,17 +65,24 @@
 </table>
 
 
+
 <ng-template #contentModal let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Test</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('No')">
-        <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <p>Supprimer ???</p>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Yes')">Oui</button>
-    </div>
+
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Supression</h4>
+    <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p><strong>Voulez vous vraiment suprimmer cette commande ?</strong></p>
+
+    <span class="text-danger">Cette opération sera définitive</span>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Annuler</button>
+    <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Ok</button>
+  </div>
+
 </ng-template>

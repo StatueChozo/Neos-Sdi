@@ -1,10 +1,7 @@
-class Order
-{
-      Id: number
-      CreationDate: Date
-      TotalPrice: number
-      CustomerId: string 
-      OrderLines: OrderLine[]
+class Order {
+      id: number;
+      creationDate: Date;
+      totalPrice: number;
+      customerId: string;
+      orderLines: OrderLine[];
 }
-
-

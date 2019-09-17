@@ -21,7 +21,6 @@ export class EditCustomersComponent implements OnInit, OnChanges {
   constructor(private service: ClientServiceService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -31,9 +30,9 @@ export class EditCustomersComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (!changes.customerEdit.firstChange) {
       this.registerForm.patchValue({
-        firstName: changes.customerEdit.currentValue[0].FirstName,
-        lastName: changes.customerEdit.currentValue[0].LastName,
-        country: changes.customerEdit.currentValue[0].Country
+        firstName: changes.customerEdit.currentValue.firstName,
+        lastName: changes.customerEdit.currentValue.lastName,
+        country: changes.customerEdit.currentValue.country
       });
     }
 
@@ -49,12 +48,12 @@ export class EditCustomersComponent implements OnInit, OnChanges {
     }
 
     const customer: Customer = {
-      Id: this.customerEdit[0].Id,
-      FirstName: this.f.firstName.value,
-      LastName: this.f.lastName.value,
-      Country: this.f.country.value
+      id: this.customerEdit.id,
+      firstName: this.f.firstName.value,
+      lastName: this.f.lastName.value,
+      country: this.f.country.value
     };
-    this.service.updaterCustomer(this.customerEdit[0].Id, customer)
+    this.service.updaterCustomer(this.customerEdit.id, customer)
       .subscribe(data => this.saveEvent.emit(null));
   }
 
